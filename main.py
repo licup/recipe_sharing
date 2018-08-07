@@ -42,6 +42,24 @@ class EnterInfoHandler(webapp2.RequestHandler):
     def post(self):
         self.response.write("POST request was madfe to the EnterInfoHandler")
 
+class ShowRecipeHandler(webapp2.RequestHandler):
+    def post(self):
+        results_template = the_jinja_env.get_template('templates/results.html')
+        recipe_first_line = self.request.get('user-first-ln')
+        recipe_second_line = self.request.get('user-second-ln')
+
+        recipe_choice = self.request.get('recipe-type')
+        
+        run_query(recipe_first_line, recipe_second_line, recipe_choice)
+        
+        pic_url = get_recipe_url(recipe_choice)
+    
+        the_variable_dict = {"line1": recipe_first_line,
+                             "line2": recipe_second_line, 
+                             "img_url" : pic_url
+        }
+        self.response.write(results_template.render(the_variable_dict))      
+
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         all_recipes = Recipe.query().fetch()
