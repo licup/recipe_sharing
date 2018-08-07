@@ -59,12 +59,6 @@ class ShowRecipeHandler(webapp2.RequestHandler):
                              "img_url" : pic_url
         }
         self.response.write(results_template.render(the_variable_dict))      
-        
-        
-class TestQueryHandler(webapp2.RequestHandler):
-    def get(self):
-        run_query("Hurrahh", "WOooott", "coding")    
-        self.response.write("query executed")
 
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
@@ -81,7 +75,6 @@ class AllRecipesHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', EnterInfoHandler),
     ('/showrecipe', ShowRecipeHandler),
-    ('/testquery', TestQueryHandler),
     ('/allrecipes', AllRecipesHandler),
 ], debug=True)
 
