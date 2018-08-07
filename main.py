@@ -74,6 +74,7 @@ class AllRecipesHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', EnterInfoHandler),
+    ('/showrecipe', ShowRecipeHandler),
     ('/allrecipes', AllRecipesHandler),
 ], debug=True)
 
