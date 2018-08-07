@@ -3,7 +3,7 @@
   <head>
     <title>A Recipe</title>
         <style>
-      .meme-div{
+      .recipe-div{
       width: 450px;
       height: 450px;
       background-size: cover;
@@ -35,15 +35,16 @@
     </style>
   </head>
   <body>
-        <h1>All recipe </h1>
+        <h1>All recipes </h1>
     <div id="container">
-     {% for recipe in all_recipes %}
+     {% for recipe in allrecipes %}
         <div class="recipe-div" style="background-image:url('{{recipe.get_recipe_url()}}');">
          <h2 id="line1">{{recipe.line1}}</h2> 
          <h2 id="line2"> {{recipe.line2}}</h2>
         </div>
         <br> <br>
     {% endfor %}
-        </div>
+    
+    </div>
   </body>
 </html>

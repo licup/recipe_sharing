@@ -10,7 +10,7 @@ the_jinja_env = jinja2.Environment(
     
     
 def run_query(first_line, second_line, pic_type):
-    recipe = Recipe(line1=first_line, line2 = second_line, img_choice = pic_type)
+    recipe = Recipe(line1=first_line, line2 = second_line, recipe_choice = pic_type)
     recipe_key = recipe.put()
     print("&&&&&&&&&&&&&&&&&&&&&&&&&")
     print recipe_key
@@ -62,14 +62,14 @@ class ShowRecipeHandler(webapp2.RequestHandler):
 
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
-        all_recipes = Recipe.query().fetch()
+        allrecipes = Recipe.query().fetch()
         
         the_variable_dict = {
-            "all_recipes": all_recipes
+            "allrecipes": allrecipes
         }
         
-        all_recipes_template = the_jinja_env.get_template('templates/all_recipes.html')
-        self.response.write(all_recipes_template.render(the_variable_dict))
+        allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')
+        self.response.write(allrecipes_template.render(the_variable_dict))
 
 
 app = webapp2.WSGIApplication([
