@@ -17,16 +17,18 @@ def run_query(first_line, second_line, third_line, pic_type):
 
     
     
-def get_recipe_url(recipe_choice):
-    if recipe_choice == 'old-class':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
-    elif recipe_choice == 'college-grad':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
-    elif recipe_choice == 'thinking-ape':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
-    elif recipe_choice == 'coding':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
-    return url
+# def get_recipe_url(recipe_choice):
+#     if recipe_choice == 'old-class':
+#         url = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
+#     elif recipe_choice == 'college-grad':
+#         url = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
+#     elif recipe_choice == 'thinking-ape':
+#         url = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
+#     elif recipe_choice == 'coding':
+#         url = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
+#     else:
+#         url = False
+#     return url
 
 
 class EnterInfoHandler(webapp2.RequestHandler):
@@ -50,26 +52,25 @@ class ShowRecipeHandler(webapp2.RequestHandler):
         recipe_third_line = self.request.get('user-third-ln')
 
         recipe_choice = self.request.get('recipe-type')
-        
         run_query(recipe_first_line, recipe_second_line, recipe_third_line, recipe_choice)
         
-        pic_url = get_recipe_url(recipe_choice)
+        # pic_url = get_recipe_url(recipe_choice)
     
         the_variable_dict = {"line1": recipe_first_line,
                              "line2": recipe_second_line, 
                              "line3": recipe_third_line,
-                             "img_url" : pic_url
+                             "img_url" : recipe_choice
         }
         self.response.write(results_template.render(the_variable_dict))      
 
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         allrecipes = Recipe.query().fetch()
-        
+        recipe_choice = self.request.get('recipe-type')
        
         the_variable_dict = {
             "allrecipes": allrecipes,
-           
+            "img_URL": recipe_choice
         }
         
         allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')
