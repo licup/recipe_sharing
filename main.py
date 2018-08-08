@@ -64,9 +64,10 @@ class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         allrecipes = Recipe.query().fetch()
         
+       
         the_variable_dict = {
             "allrecipes": allrecipes,
-            'imageURL': 
+            'imageURL': input("Insert link here: ")
         }
         
         allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')
