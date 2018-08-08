@@ -19,14 +19,14 @@ def run_query(first_line, second_line, pic_type):
     
 def get_recipe_url(recipe_choice):
     if recipe_choice == 'old-class':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
+        url1 = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
     elif recipe_choice == 'college-grad':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
+        url1 = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
     elif recipe_choice == 'thinking-ape':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
+        url1 = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
     elif recipe_choice == 'coding':
-        url = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
-    return url
+        url1 = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
+    return url1
 
 
 class EnterInfoHandler(webapp2.RequestHandler):
@@ -65,7 +65,8 @@ class AllRecipesHandler(webapp2.RequestHandler):
         allrecipes = Recipe.query().fetch()
         
         the_variable_dict = {
-            "allrecipes": allrecipes
+            "allrecipes": allrecipes,
+            'imageURL': 
         }
         
         allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')
@@ -75,6 +76,6 @@ class AllRecipesHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', EnterInfoHandler),
     ('/showrecipe', ShowRecipeHandler),
-    ('/allrecipes', AllRecipesHandler),
+    ('/allrecipes', AllRecipesHandler)
 ], debug=True)
 
