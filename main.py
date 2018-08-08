@@ -78,5 +78,9 @@ app = webapp2.WSGIApplication([
     ('/', EnterInfoHandler),
     ('/showrecipe', ShowRecipeHandler),
     ('/allrecipes', AllRecipesHandler)
+<<<<<<< HEAD
+], debug=True)
+=======
 ], debug=True)
 
+>>>>>>> 19d22874f9d3db39a425407f83440b2c5c1448a9
