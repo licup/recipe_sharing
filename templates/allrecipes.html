@@ -11,6 +11,14 @@
             text-align: center;
             position: relative;
         }
+        
+        h1 {
+            position: relative;
+            text-align: center;
+            color: black;
+            text-shadow: 3px 3px #2233;
+            background-color: blue;
+        }
 
         h2 {
             position: absolute;
@@ -31,9 +39,13 @@
             bottom: 0;
         }
 
+        #line3 {
+            bottom: 50px;
+        }
+
         #container {
             display: flex;
-            max-width: 900px;
+            max-width: 1500px;
             margin: 0 auto;
             flex-wrap: wrap;
         }
@@ -41,12 +53,13 @@
 </head>
 
 <body>
-    <h1>All recipes </h1>
+    <h1> All recipes </h1>
     <div id="container">
         {% for recipe in allrecipes %}
         <div class="recipe-div" style="background-image:url('"+{{imageURL}}+"')">
-            <h2 id="line1">{{recipe.line1}}</h2>
+            <h2 id="line1"> {{recipe.line1}}</h2>
             <h2 id="line2"> {{recipe.line2}}</h2>
+            <h2 id="line3"> {{recipe.line3}}</h2>
         </div>
         <br> <br> {% endfor %}
 

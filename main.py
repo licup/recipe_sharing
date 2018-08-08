@@ -9,8 +9,8 @@ the_jinja_env = jinja2.Environment(
     autoescape=True)
     
     
-def run_query(first_line, second_line, pic_type):
-    recipe = Recipe(line1=first_line, line2 = second_line, recipe_choice = pic_type)
+def run_query(first_line, second_line, third_line, pic_type):
+    recipe = Recipe(line1=first_line, line2 = second_line, line3 = third_line, recipe_choice = pic_type)
     recipe_key = recipe.put()
     print("&&&&&&&&&&&&&&&&&&&&&&&&&")
     print recipe_key
@@ -19,20 +19,20 @@ def run_query(first_line, second_line, pic_type):
     
 def get_recipe_url(recipe_choice):
     if recipe_choice == 'old-class':
-        url1 = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
+        url = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg'
     elif recipe_choice == 'college-grad':
-        url1 = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
+        url = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'
     elif recipe_choice == 'thinking-ape':
-        url1 = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
+        url = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
     elif recipe_choice == 'coding':
-        url1 = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
-    return url1
+        url = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg'
+    return url
 
 
 class EnterInfoHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         the_variable_dict = {
-            "greeting": "Hello", 
+            "greeting": "Recipe Website", 
             "adjective": "delicious"
         }
         
@@ -47,15 +47,17 @@ class ShowRecipeHandler(webapp2.RequestHandler):
         results_template = the_jinja_env.get_template('templates/results.html')
         recipe_first_line = self.request.get('user-first-ln')
         recipe_second_line = self.request.get('user-second-ln')
+        recipe_third_line = self.request.get('user-third-ln')
 
         recipe_choice = self.request.get('recipe-type')
         
-        run_query(recipe_first_line, recipe_second_line, recipe_choice)
+        run_query(recipe_first_line, recipe_second_line, recipe_third_line, recipe_choice)
         
         pic_url = get_recipe_url(recipe_choice)
     
         the_variable_dict = {"line1": recipe_first_line,
                              "line2": recipe_second_line, 
+                             "line3": recipe_third_line,
                              "img_url" : pic_url
         }
         self.response.write(results_template.render(the_variable_dict))      
@@ -67,7 +69,7 @@ class AllRecipesHandler(webapp2.RequestHandler):
        
         the_variable_dict = {
             "allrecipes": allrecipes,
-            'imageURL': input("Insert link here: ")
+           
         }
         
         allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')

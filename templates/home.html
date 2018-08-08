@@ -6,17 +6,19 @@
   <body>
     <h1>{{greeting}}</h1>
     <h1>Recipe Generator</h1>
-    <img height="100px" width="150px" src="https://atmedia.imgix.net/5cd541275ee8954d2815fb4862417e66380c9f8b?auto=format&q=45&w=600.0&h=750.0&fit=max&cs=strip">
+    <img height="300px" width="450px" src="https://atmedia.imgix.net/5cd541275ee8954d2815fb4862417e66380c9f8b?auto=format&q=45&w=600.0&h=750.0&fit=max&cs=strip">
     <h2>Welcome to my {{adjective}} Recipe Generator!</h2>
     
     <form method=POST action="/showrecipe">
       Line 1 of Recipe:<br>
       <input type="text" name="user-first-ln" value="First Line of Recipe">
       <br>
-       Line 2 of Recipe:<br>
+      Line 2 of Recipe:<br>
       <input type="text" name="user-second-ln" value="Second Line of Recipe">
       <br>
-      
+      Ingredients of Recipe:<br>
+      <input type="text" name="user-third-ln" value="Ingredients of Recipe">
+      <br>
       Recipe Type:<br>
      <select name="recipe-type">
         <option value="college-grad">Happy College Grad</option>
