@@ -42,7 +42,7 @@ class DeleteRecipesHandler(webapp2.RequestHandler):
 class EnterInfoHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         the_variable_dict = {
-            "greeting": "Recipe Website", 
+            "greeting": "Perfect Recipes", 
             "adjective": "delicious"
         }
         
