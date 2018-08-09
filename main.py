@@ -9,8 +9,8 @@ the_jinja_env = jinja2.Environment(
     autoescape=True)
     
     
-def run_query(first_line, second_line, third_line, pic_type):
-    recipe = Recipe(line1=first_line, line2 = second_line, line3 = third_line, recipe_choice = pic_type)
+def run_query(first_line, second_line, third_line, pic_url):
+    recipe = Recipe(line1=first_line, line2 = second_line, line3 = third_line, image_url = pic_url)
     recipe_key = recipe.put()
     print("&&&&&&&&&&&&&&&&&&&&&&&&&")
     print recipe_key
@@ -59,21 +59,24 @@ class ShowRecipeHandler(webapp2.RequestHandler):
         recipe_second_line = self.request.get('user-second-ln')
         recipe_third_line = self.request.get('user-third-ln')
 
-        recipe_choice = self.request.get('recipe-type')
-        run_query(recipe_first_line, recipe_second_line, recipe_third_line, recipe_choice)
+        image_url = self.request.get('image-url')
+        run_query(recipe_first_line, recipe_second_line, recipe_third_line, image_url)
         
         # pic_url = get_recipe_url(recipe_choice)
     
         the_variable_dict = {"line1": recipe_first_line,
                              "line2": recipe_second_line, 
                              "line3": recipe_third_line,
-                             "img_url" : recipe_choice
+                             "img_url" : image_url
         }
         self.response.write(results_template.render(the_variable_dict))      
 
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         allrecipes = Recipe.query().fetch()
+        print "**************************"
+        for recipe in allrecipes:
+            print recipe
         
        
         the_variable_dict = {

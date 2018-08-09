@@ -56,7 +56,7 @@
     <h1> All Recipes </h1>
     <div id="container">
         {% for recipe in allrecipes %}
-        <div class="recipe-div" style="background-image:url('"+{{recipe_choice}}+"')">
+        <div class="recipe-div" style="background-image:url('{{recipe.image_url}}')">
             <h2 id="line1"> {{recipe.line1}}</h2>
             <h2 id="line2"> {{recipe.line2}}</h2>
             <h2 id="line3"> {{recipe.line3}}</h2>
