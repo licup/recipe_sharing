@@ -15,7 +15,15 @@ def run_query(first_line, second_line, third_line, pic_type):
     print("&&&&&&&&&&&&&&&&&&&&&&&&&")
     print recipe_key
 
-    
+def delete_all_recipes():
+    all_recipes = Recipe.query().fetch()
+    for recipe in all_recipes:
+        print recipe.key.delete()
+        
+class DeleteRecipesHandler(webapp2.RequestHandler):
+    def get(self):  # for a get request
+        delete_all_recipes()
+        self.response.write('query executed')
     
 # def get_recipe_url(recipe_choice):
 #     if recipe_choice == 'old-class':
@@ -66,11 +74,11 @@ class ShowRecipeHandler(webapp2.RequestHandler):
 class AllRecipesHandler(webapp2.RequestHandler):
     def get(self):  # for a get request
         allrecipes = Recipe.query().fetch()
-        recipe_choice = self.request.get('recipe-type')
+        
        
         the_variable_dict = {
             "allrecipes": allrecipes,
-            "img_URL": recipe_choice
+           
         }
         
         allrecipes_template = the_jinja_env.get_template('templates/allrecipes.html')
@@ -80,5 +88,6 @@ class AllRecipesHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', EnterInfoHandler),
     ('/showrecipe', ShowRecipeHandler),
-    ('/allrecipes', AllRecipesHandler)
+    ('/allrecipes', AllRecipesHandler),
+    ('/deleterecipes', DeleteRecipesHandler),
 ], debug=True)
