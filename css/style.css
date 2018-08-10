@@ -1,3 +1,14 @@
-img {
-    background-position: center;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "image ingredients";
+}
+
+.recipe-image {
+  grid-area: image;
+}
+
+.ingredients-list {
+  grid-area: ingredients;
 }
